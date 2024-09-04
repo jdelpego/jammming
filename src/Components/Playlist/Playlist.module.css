@@ -1,0 +1,50 @@
+.playlistBox {
+    background-color: #2E3B42;
+    border-radius: 3rem;
+    border: 3px lightgray solid;
+    box-sizing: border-box;
+    height: 30rem;
+    padding: 0rem;
+    display: grid;
+    grid-template-columns: 1fr minmax(0, 30rem) 1fr;
+    grid-template-areas: ". playlist .";
+    justify-items: center; 
+
+}
+
+.playlist {
+    width: 80%;
+    padding: 1rem;
+    grid-area: playlist;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.title {
+    width: 100%;
+    display: flex;
+    border-radius: 1rem;
+    border: 2px solid white;
+    height: 2rem;
+    font-size: 2rem;
+    text-align: center;
+    background-color: lightgray;
+    font-weight: 500;
+}
+
+.footer {
+    display: flex;
+    flex-flow: ro1w nowrap;
+    justify-content: space-between;
+    width: 100%;
+    margin: 1rem;
+}
+
+.button {
+    border-radius: 1;
+    height: 2rem;
+    border-radius: 1rem;
+    border: 0px;
+    width: 7rem;
+}
