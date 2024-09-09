@@ -87,13 +87,15 @@ const generateRandomString = (length) => {
     };
   
     const response = await fetch('https://accounts.spotify.com/api/token', payload);
-    localStorage.setItem('access_token', response.access_token);
+    const data = await response.json();
+    localStorage.setItem('access_token', data.access_token);
   };
   
   // Main function to initiate the Spotify authorization flow and return the access token
   export const getSpotifyAccessToken = async () => {
     if (window.location.search.includes('code=')) {
-      console.log('Token stored locally');
+      await getAccessTokenFromCode();
+      console.log(`Token stored locally ${localStorage.getItem('access_token')}`);
     } else {
       await authorizeWithSpotify();
       await getAccessTokenFromCode();

@@ -4,7 +4,7 @@
     width: 100%;
     border-radius: 1rem;
     border: 0px;
-    margin: 1rem 0;
+    margin-top: 1rem;
     background-color: lightgray;
     display: grid;
     padding: 2%;
@@ -25,10 +25,16 @@
 .title {
     grid-area: title;
     font-weight: 600;
+    overflow: hidden;          /* Hides overflow text */
+    text-overflow: ellipsis;   /* Adds ellipsis (...) for overflow text */
+    white-space: nowrap;       /* Prevents text from wrapping to the next line */
 }
 
 .author {
     grid-area: author;
+    overflow: hidden;          /* Hides overflow text */
+    text-overflow: ellipsis;   /* Adds ellipsis (...) for overflow text */
+    white-space: nowrap;       /* Prevents text from wrapping to the next line */
 }
 
 .duration {

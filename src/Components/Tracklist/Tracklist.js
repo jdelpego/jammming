@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Track from '../Track/Track';
 import styles from './Tracklist.module.css'
 
-function Tracklist(){
+function Tracklist({ tracks }){
     return (
+        
         <div className={styles.tracklist}>
-            <Track />
+            {tracks.map((track) => {
+                return <Track
+                name={track.name}
+                image_src={track.image_src}
+                duration={track.duration}
+                artist={track.artist} 
+                />
+            })
+            }
         </div>
     );
 }
