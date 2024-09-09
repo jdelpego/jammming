@@ -8,24 +8,40 @@ import { convertMsToMinutesSeconds, convertDataToTracksArray } from '../../asset
 
 function Playlist() {
     const [name, setName] = useState('');
-    const [tracks, setTracks] = useState([]);
+    const [playlistTracks, setPlaylistTracks] = useState([]);
+    const [searchTracks, setSearchTracks] = useState([]);
+    const [search, setSearch] = useState('');
+    const [searchMode, setSearchMode] = useState(false);
 
-    const clickHandler = () => {
-        getSpotifyAccessToken().then(() => search_request('tyler').then((data) => 
-            {
-                console.log(JSON.stringify(data));
-                setTracks(convertDataToTracksArray(data));
+    const searchHandler = () => {
+        if(searchMode === true){
+            setSearchMode(false);
+        }
+        else{
+            if (search === ''){
+            alert('Search value must not be blank');
             }
-    ))};
+            else{
+            setSearchMode(true);
+            getSpotifyAccessToken().then(() => search_request(search).then((data) => 
+                {
+                    console.log(JSON.stringify(data));
+                    setSearchTracks(convertDataToTracksArray(data));
+                }
+            ));
+            }
+        }
+        };
 
     return (
         <div className={styles.playlistBox}>
             <div className={styles.playlist}>
                 <input className={styles.title} type="text" value={name} onChange={(e) => setName(e.target.value)} />
-                {tracks.length > 0 && <Tracklist tracks={tracks}/>}
+                <input className={styles.search} type="text" value={searchMode ? search : ''} onChange={(e) => setSearch(e.target.value)} />
+                <Tracklist tracks={searchMode ? searchTracks : playlistTracks} setPlaylistTracks={setPlaylistTracks} isSearchMode={searchMode} setSearchTracks={setSearchTracks}/>
                 <footer className={styles.footer}>
-                    <button className={styles.button} style={{backgroundColor: 'lightblue'}}>Search</button>
-                    <button className={styles.button} style={{backgroundColor: 'lightgreen'}} onClick={clickHandler}>Save To Spotify</button>
+                    <button className={styles.button} style={{backgroundColor: searchMode ? 'lightyellow': 'lightblue'}} onClick={searchHandler}> {searchMode ? 'Back To Playlist' : 'Search'}</button>
+                    {!searchMode && <button className={styles.button} style={{backgroundColor: 'lightgreen'}}>Save To Spotify</button>}
                 </footer>
             </div>
            

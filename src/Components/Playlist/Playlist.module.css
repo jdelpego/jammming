@@ -26,6 +26,21 @@
 .title {
     width: 100%;
     display: flex;
+    border: 0px;
+    height: 4rem;
+    font-size: 4rem;
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    background-color: transparent;
+    color: white;
+    text-overflow: ellipsis;
+    border-bottom: 2px white solid;
+}
+
+.search {
+    width: 100%;
+    display: flex;
     border-radius: 1rem;
     border: 2px solid white;
     height: 2rem;

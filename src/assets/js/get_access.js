@@ -85,19 +85,37 @@ const generateRandomString = (length) => {
         code_verifier: codeVerifier,
       }),
     };
+
+    try {
+      const response = await fetch('https://accounts.spotify.com/api/token', payload);
+      const data = await response.json(); // Parse the response as JSON
   
-    const response = await fetch('https://accounts.spotify.com/api/token', payload);
-    const data = await response.json();
-    localStorage.setItem('access_token', data.access_token);
-  };
-  
-  // Main function to initiate the Spotify authorization flow and return the access token
-  export const getSpotifyAccessToken = async () => {
-    if (window.location.search.includes('code=')) {
-      await getAccessTokenFromCode();
-      console.log(`Token stored locally ${localStorage.getItem('access_token')}`);
-    } else {
-      await authorizeWithSpotify();
-      await getAccessTokenFromCode();
+      if (response.ok) {
+        localStorage.setItem('access_token', data.access_token); // Store the access token
+        console.log('Access token obtained:', data.access_token);
+        return data.access_token;
+      } 
+      else if (data['error_description'].includes('expired')){
+        window.location.assign('http://localhost:3000/');
+      }
+      else {
+        console.log(JSON.stringify(data));
+        console.error('Failed to obtain access token:', data);
+        return null;
+      }
+    } catch (error) {
+      console.error('Error fetching access token:', error);
+      return null;
     }
   };
+
+// Main function to initiate the Spotify authorization flow and return the access token
+export const getSpotifyAccessToken = async () => {
+  if (window.location.search.includes('code=')){
+    // If there is a code in the URL, exchange it for an access token
+    return await getAccessTokenFromCode();
+  } else {
+    // Otherwise, start the authorization process
+    await authorizeWithSpotify();
+  }
+};
