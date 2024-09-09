@@ -12,6 +12,10 @@
 
 }
 
+.form {
+    width: 100%;
+}
+
 .playlist {
     height: 100%;
     overflow: scroll;
