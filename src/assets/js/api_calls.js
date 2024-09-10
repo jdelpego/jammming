@@ -62,7 +62,7 @@ export const create_playlist = async (user_id, playlistName, playlistDescription
     }
 
     const data = await response.json();
-    console.log('Created Playlist ID:', data.id); // Print the created playlist's ID
+    alert(`Created Playlist with ID: ${data.id}`); // Print the created playlist's ID
     return data.id; // Return the created playlist's ID
 
   } catch (error) {
