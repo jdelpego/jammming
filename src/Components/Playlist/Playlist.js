@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Playlist.module.css'
 import Tracklist from '../Tracklist/Tracklist';
 import { getSpotifyAccessToken } from '../../assets/js/get_access';
@@ -7,11 +7,39 @@ import { convertMsToMinutesSeconds, convertDataToTracksArray } from '../../asset
 
 
 function Playlist() {
-    const [name, setName] = useState('');
-    const [playlistTracks, setPlaylistTracks] = useState([]);
-    const [searchTracks, setSearchTracks] = useState([]);
-    const [search, setSearch] = useState('');
-    const [searchMode, setSearchMode] = useState(false);
+
+    const [name, setName] = useState(localStorage.getItem('name') || '');
+    const [playlistTracks, setPlaylistTracks] = useState(
+      JSON.parse(localStorage.getItem('playlistTracks')) || []
+    );
+    const [searchTracks, setSearchTracks] = useState(
+      JSON.parse(localStorage.getItem('searchTracks')) || []
+    );
+    const [search, setSearch] = useState(localStorage.getItem('search') || '');
+    const [searchMode, setSearchMode] = useState(
+      JSON.parse(localStorage.getItem('searchMode')) || false
+    );
+  
+    // Effect to save state to localStorage whenever it changes
+    useEffect(() => {
+      localStorage.setItem('name', name);
+    }, [name]);
+  
+    useEffect(() => {
+      localStorage.setItem('playlistTracks', JSON.stringify(playlistTracks));
+    }, [playlistTracks]);
+  
+    useEffect(() => {
+      localStorage.setItem('searchTracks', JSON.stringify(searchTracks));
+    }, [searchTracks]);
+  
+    useEffect(() => {
+      localStorage.setItem('search', search);
+    }, [search]);
+  
+    useEffect(() => {
+      localStorage.setItem('searchMode', JSON.stringify(searchMode));
+    }, [searchMode]);
 
     const submitHandler = (event) => {
         event.preventDefault(); 
