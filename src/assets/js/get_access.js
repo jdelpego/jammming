@@ -32,8 +32,7 @@ const generateRandomString = (length) => {
   const authorizeWithSpotify = async () => {
     const clientId = '9135be790fb84ed79e8b4ad1945e4953'; // Your client ID
     const redirectUri = 'http://localhost:3000/'; // Your redirect URI
-    const scope = 'user-read-private user-read-email'; // Define scopes
-    const codeVerifier = generateRandomString(64);
+    const scope = 'user-read-private user-read-email playlist-modify-public playlist-modify-private';    const codeVerifier = generateRandomString(64);
     const codeChallenge = await generateCodeChallenge(codeVerifier);
   
     // Save the code verifier in localStorage for use later

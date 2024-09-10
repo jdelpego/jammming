@@ -20,7 +20,7 @@ export function convertDataToTracksArray(data) {
     // Iterate over the tracks in the data
     for (const track of data['tracks']['items']) {
       // Extract necessary information for each track
-      const id = track['id'];
+      const id = track['uri'];
       const name = track['name'];
       const image_src = track['album']['images'][0]['url']; // Accessing the image URL
       const duration = convertMsToMinutesSeconds(track['duration_ms']); // Convert duration from ms to "minutes:seconds"
