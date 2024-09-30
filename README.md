@@ -22,5 +22,5 @@ Features:
 
 ### Saving Playlist to Spotify
 
-<img width="100" alt="#1 Playlist" src="https://github.com/user-attachments/assets/f244d272-430d-48c1-8d34-8e25bf6cc54b">
+<img width="200" alt="#1 Playlist" src="https://github.com/user-attachments/assets/f244d272-430d-48c1-8d34-8e25bf6cc54b">
 
